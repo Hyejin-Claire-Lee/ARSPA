@@ -4,16 +4,16 @@
   Prerequisites for setting up the environment required before testing our system.
   
   ### ZoKrates
-    #### ZoKrates Installation
-      Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/gettingstarted.html) for a one-line installation command.
+  #### ZoKrates Installation
+    Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/gettingstarted.html) for a one-line installation command.
       
-    #### Setting up ZoKrates Path
-      To ensure the ZoKrates binary is accessible from any directory, add it to your system's PATH. 
-      Run the following command to add the path to your shell’s configuration file (e.g., .bashrc, .zshrc), making the change permanent:
+  #### Setting up ZoKrates Path
+    To ensure the ZoKrates binary is accessible from any directory, add it to your system's PATH. 
+    Run the following command to add the path to your shell’s configuration file (e.g., .bashrc, .zshrc), making the change permanent:
       
-        ```
-        echo 'export PATH=$PATH:$HOME/.zokrates/bin' >> ~/.zshrc  # or ~/.bashrc
-        source ~/.zshrc  # apply the change
+      ```
+      echo 'export PATH=$PATH:$HOME/.zokrates/bin' >> ~/.zshrc  # or ~/.bashrc
+      source ~/.zshrc  # apply the change
       ```
       
   ### Remix IDE
