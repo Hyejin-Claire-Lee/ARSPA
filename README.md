@@ -5,7 +5,7 @@
   
   ### ZoKrates
   #### ZoKrates Installation
-    Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/gettingstarted.html) for a one-line installation command.
+  Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/gettingstarted.html) for a one-line installation command.
       
   #### Setting up ZoKrates Path
   To ensure the ZoKrates binary is accessible from any directory, add it to your system's PATH. 
