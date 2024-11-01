@@ -1,5 +1,4 @@
-# ARSPA
-# Distribute Key Generation experiments
+# ARSPA Experiments
 
 This repository comprises:
 
