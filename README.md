@@ -9,10 +9,10 @@
 
   
   ### A.2. ZoKrates
-  #### ZoKrates Installation
+  - #### ZoKrates Installation
   Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/gettingstarted.html) for a one-line installation command.
   
-  #### Setting up ZoKrates Path
+  - #### Setting up ZoKrates Path
   To ensure the ZoKrates binary is accessible from any directory, add it to your system's `PATH` environment variable. 
   Run the following command to add the path to your shell’s configuration file (e.g., `.bashrc`, `.zshrc`), making the change permanent:
   ```
