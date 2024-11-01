@@ -39,17 +39,19 @@ zokrates print-proof --format remix
 - The output is the proof string $\pi$ and public input/output ($\vec{v},\vec{o}$). They can be passed directly to the smart contract functions $\mathsf{verifyTx}$.
 
 ### 3. zkSNARK programs' inputs generation
-### The root and leaves of the Merkle tree can be computed using Zokrates programs in the input folders (input7, input10, input13, input17)
+The root and leaves of the Merkle tree can be computed using Zokrates programs in the input folders (input7, input10, input13, input17)
   ```
   zokrates compile -i <name>.zok
   zokrates compute-witness --verbose >> output.txt
   ```
-### For example, to compute a leaf ($\mathsf{leaf = H(H(r),H(cID))}$), we can run functions $c<number>$:
+
+For example, to compute a leaf ($\mathsf{leaf = H(H(r),H(cID))}$), we can run functions $c<number>$:
   ```
   zokrates compile -i c1.zok
   zokrates compute-witness --verbose >> output.txt
   ```
-### The leaf is written to output.txt:
+
+The leaf is written to output.txt:
   ```
   Computing witness...
 
@@ -58,12 +60,14 @@ zokrates print-proof --format remix
 
   Witness file written to 'witness'
   ```
-### Similarly, we can compute the root by using functions $r<number>$
+
+Similarly, we can compute the root by using functions $r<number>$
   ```
   zokrates compile -i r1.zok
   zokrates compute-witness --verbose >> output.txt
   ```
-### The root is written to output.txt:
+
+The root is written to output.txt:
   ```
   Computing witness...
 
@@ -73,9 +77,9 @@ zokrates print-proof --format remix
   Witness file written to 'witness'
   ```
 ## 4. generate zkSNARK proof
- The main zokrates programs are in folders: depth7 ($2^7$ users), depth10 ($2^{10}$ users), depth13 ($2^{13}$ users), and depth17 ($2^{17}$ users).
- In each folder, there are 13 programs corresponding to the number of candidates (from 1 candidate to 13 candidates each reviewer).
- For example, to generate a proof for a system of $2^{17}$ users and each user reviews 13 candidates, we can use /arspa/depth17/c13/c13_d17.zok:
+The main zokrates programs are in folders: depth7 ($2^7$ users), depth10 ($2^{10}$ users), depth13 ($2^{13}$ users), and depth17 ($2^{17}$ users).
+In each folder, there are 13 programs corresponding to the number of candidates (from 1 candidate to 13 candidates each reviewer).
+For example, to generate a proof for a system of $2^{17}$ users and each user reviews 13 candidates, we can use /arspa/depth17/c13/c13_d17.zok:
   ```
   zokrates compile -i c13_d17.zok
   zokrates setup -s gm17
@@ -83,10 +87,10 @@ zokrates print-proof --format remix
   zokrates generate-proof -s gm17
   zokrates print-proof --format remix >> proof_c13d17.txt
   ```
- The verification key in the smart contract should be updated using the newly generated verification key.
- The proof string in proof_c13d17.txt can be used to call the function verifyTx in the smart contract.
+The verification key in the smart contract should be updated using the newly generated verification key.
+The proof string in proof_c13d17.txt can be used to call the function verifyTx in the smart contract.
 
 ## 5. Smart contract
- The smart contract can be deployed in the main net or testnet.
- We can test the verifyTx() function by using the proof string from the above steps.
+The smart contract can be deployed in the main net or testnet.
+We can test the verifyTx() function by using the proof string from the above steps.
 - NOTE: candidate IDs must be in the range of 0 to 12.
