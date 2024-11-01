@@ -1,0 +1,28 @@
+import "hashes/poseidon/poseidon" as poseidon;
+from "ecc/babyjubjubParams" import BabyJubJubParams;
+import "ecc/babyjubjubParams" as context;
+
+def main()->field{
+    field leaf = 20664418685092435927892975007442348063864319023762206914598259188896208156903;
+    field[17] path = [324324,234324,543543,23432,543,123,56757,213423,78768,23423,7867,324234,43543,54645645,657657,234234,56756765];
+
+    field node16 = poseidon([leaf,path[16]]);   
+    field node15 = poseidon([node16,path[15]]);         
+    field node14 = poseidon([node15,path[14]]);
+    field node13 = poseidon([node14,path[13]]);
+    field node12 = poseidon([node13,path[12]]);
+    field node11 = poseidon([node12,path[11]]);
+    field node10 = poseidon([node11,path[10]]);
+    field node9  = poseidon([node10,path[9]]);
+    field node8  = poseidon([node9,path[8]]);
+    field node7  = poseidon([node8,path[7]]);
+    field node6  = poseidon([node7,path[6]]);              
+    field node5  = poseidon([node6,path[5]]);
+    field node4  = poseidon([node5,path[4]]);
+    field node3  = poseidon([node4,path[3]]);
+    field node2  = poseidon([node3,path[2]]);
+    field node1  = poseidon([node2,path[1]]);
+    field root = poseidon([node1,path[0]]); //node[0] is computed root in program.
+
+    return root;
+}                                                                                        

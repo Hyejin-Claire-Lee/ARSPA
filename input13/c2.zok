@@ -1,0 +1,13 @@
+import "hashes/poseidon/poseidon" as poseidon;
+from "ecc/babyjubjubParams" import BabyJubJubParams;
+import "ecc/babyjubjubParams" as context;
+
+def main()->field{
+    field r = 32948723847;
+    field[2] cID = [392874, 987324];
+    field h    = poseidon([r]);
+    field cid  = poseidon([cID[0],cID[1]]);
+    field leaf = poseidon([h, cid]);
+
+    return leaf;
+}
