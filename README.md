@@ -1,4 +1,7 @@
 # ARSPA for testing purposes.
+This is a large-scale blockchain-based anonymous reputation system designed to operate effectively for upward feedback in HRM performance appraisals (tested up to \(2^{17}\)).
+This file provides source code for various scenarios, considering Merkle tree depth (evaluaotrs ≤ \(2^n\)) and the number of candidates. 
+Among these, the `main.zok` and `smartcontract.sol` files are designed for a scenario that supports performance appraisals with up to \(2^{17}\) evaluators and a maximum of 13 candidates, reflecting the largest scale in our testing.
 
 ## A. Prerequisites
 Prerequisites for setting up the environment required before testing our system.
