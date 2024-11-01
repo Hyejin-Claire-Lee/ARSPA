@@ -7,10 +7,7 @@ pragma solidity ^0.8.0;
  * @author Mustafa Al-Bassam (mus@musalbas.com)
  * @dev Homepage: https://github.com/musalbas/solidity-BN256G2
  */
-/**
-   * @title Verifier_13
-   * @custom:dev-run-script scripts/deploy_with_ethers.ts
-*/
+
 library BN256G2 {
     uint256 internal constant FIELD_MODULUS = 0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47;
     uint256 internal constant TWISTBX = 0x2b149d40ceb8aaae81be18991be06ac3b5b4c5e559dbefa33267e6dc24a138e5;
@@ -564,48 +561,29 @@ contract Verifier {
         Pairing.G1Point c;
     }
     function verifyingKey() pure internal returns (VerifyingKey memory vk) {
-        vk.h= Pairing.G2Point([uint256(0x115a9530cdb9da5de60a85cf52225fe7f5ca63421a03e160b6d4129c44f78d87), uint256(0x162d302cdeda109b9508fe7f35eb54b55658444514c457198074ac9fe5e327f3)], [uint256(0x18253ee651894e8044e046d438fc29ac29447a43e558c8b847021a2c9d66d920), uint256(0x05171c45c6a47f31564fe087cfb90ef1d1a02e191c8279db43d43165bd2be016)]);
-        vk.g_alpha = Pairing.G1Point(uint256(0x1f67f56bb8e611719c699db47d7502f04ec5341667effff8d49f977db02b72b0), uint256(0x1764d29253be4d610035fb3ba7560bbbd22edf6d2fb7db79fd6683222caf6480));
-        vk.h_beta = Pairing.G2Point([uint256(0x16a1aef15a545567a19e15fd3b4608294442e86b1b78aae9443f68c88823d3c2), uint256(0x20569eb9138847c4b75a8fb1b4d130fcb4abb0f35627b61780412eb2eac3ca0e)], [uint256(0x0ab78bf9c58f7328f34c2bb775db79ce1bbdc10386b0ff142cc31ce390c492a3), uint256(0x23f854cdc7ebdb37525c56b034166f2c1ba719f7a34e819ec9c0fe41cb5c7b86)]);
-        vk.g_gamma = Pairing.G1Point(uint256(0x1cfca122e45294743bc8da01a0028edf540303aa6c5431ba5681eed7b41cc441), uint256(0x1125186336e225af00c6c7a5d0267aa7335d92a03dd40911a6988e50b3513238));
-        vk.h_gamma = Pairing.G2Point([uint256(0x115a9530cdb9da5de60a85cf52225fe7f5ca63421a03e160b6d4129c44f78d87), uint256(0x162d302cdeda109b9508fe7f35eb54b55658444514c457198074ac9fe5e327f3)], [uint256(0x18253ee651894e8044e046d438fc29ac29447a43e558c8b847021a2c9d66d920), uint256(0x05171c45c6a47f31564fe087cfb90ef1d1a02e191c8279db43d43165bd2be016)]);
-        vk.query = new Pairing.G1Point[](17);
-        vk.query[0] = Pairing.G1Point(uint256(0x09e52f167d0b9dbafe4952db6056693f869af58153914157a37ddcce49150a06), uint256(0x1229099a354b3badf295be7692c6ffbf74bb6f317dd0cafb40e69a4b5d893d9f));
-        vk.query[1] = Pairing.G1Point(uint256(0x2540e0cc7c528033a373250d856707c654b7bbf1d27dbd82430f17a718f9fd54), uint256(0x1cc9994660c37bf9dc8e2b185c1862cfd6f5f1d917fcaede99d35a4d32e7ed14));
-        vk.query[2] = Pairing.G1Point(uint256(0x1249a3cbda776afe5f3e4c08f82caab79698bcaf698d2ed3ae6c8ae1113c8b85), uint256(0x2cde28cf28afe1b2229e8e7bfe2079e85f6dc960acd56bf113a6340e650ecf93));
-        vk.query[3] = Pairing.G1Point(uint256(0x2e8dfaae5f90c77f07639c69468cf43cc812c80abbe21babbff0f7ebca5bbbe0), uint256(0x019f62c1d25fff028bc9eb399770f18b88561eed49eabb06999cd029b0fb089b));
-        vk.query[4] = Pairing.G1Point(uint256(0x23a317740226d911dd3bc76ebf5bc79202e6412c62400eb64cf97cef29e84ad4), uint256(0x1b01157e2bf0475451a13cedbdb2fdc1d8a24eda2028e3b0d6485e31b813f897));
-        vk.query[5] = Pairing.G1Point(uint256(0x07de53fc0b6fd7fc35c359e97552b47b1614b2699a29a3f925b265b0d02af4d2), uint256(0x00c0e2a94b95c634e3496982552631871693c24f4afc7ff4d61196c52d19dfb5));
-        vk.query[6] = Pairing.G1Point(uint256(0x085649738091ef20439b60c5ee843e6c3e1f34e8053c831e789a97ec0bf331bd), uint256(0x09182cfccb1a9cbb87dabbd09a62d3028960043f99516ba66373dd352936a82a));
-        vk.query[7] = Pairing.G1Point(uint256(0x162193e1ee9b87366393c388c165045dc109ee28e2c6178f064ff74e96a49e60), uint256(0x120a0486062ddf3d186f6ce9439b610e605ca3cba040e695ae9c1666d209ab8c));
-        vk.query[8] = Pairing.G1Point(uint256(0x0758d3b8a5c1b134d57aa22acebf1a5af59ec9b116d9a95650d3b75e8609ef24), uint256(0x04d4c9255289ea0e3501e83b496abcd9b7c0e1aa42213483c2e7024cfba7f1bd));
-        vk.query[9] = Pairing.G1Point(uint256(0x085970fbc97ac1b8fc2433dc3cfd4ff0b81a2b8a37f843955ced2b19b6d0b71b), uint256(0x1f61255b82623ded058e841f43298fd3559b14f10e1c1f0b2e20bd1feb1f436d));
-        vk.query[10] = Pairing.G1Point(uint256(0x25b86d0800a77740e08d969be951de4d7f47d292a237e7a4735e538b633da6ef), uint256(0x1840f97c22cee1a150f2010b6a145146f8feee7424ad905decc97e21f4eb2e19));
-        vk.query[11] = Pairing.G1Point(uint256(0x1be00ddd244eeb39bbd4b7e5e31508a89d1e007f2857b765906dc1620fa79075), uint256(0x2c83944aa5185ec9433a049af5b7e63a0c5bdcc8ee8fa979e06f7024e7a6f799));
-        vk.query[12] = Pairing.G1Point(uint256(0x288a3d94464974b9004c2a40ee38000f77c4c1f0b2cf4904710eee503ac519b9), uint256(0x2036c04280d80c25c58ca2ad8f69337dd23118430666d17011d3e49e43cc57dc));
-        vk.query[13] = Pairing.G1Point(uint256(0x0e84caf343235cd2ed6575a6ead2275d88e76aac088eaa4e586e9192f29e0f52), uint256(0x1284ec9ed20e1760e3d7cc457992a03dc75b26a8e0f36b5777f5ed0da59945f8));
-        vk.query[14] = Pairing.G1Point(uint256(0x1d2d0ffb401572ca2d9cf8df5f32dd4788f31ca3a0cb4f95a51932fd6fe52a8e), uint256(0x1744212e39b7fe8b73cff91e5c1de3e47fb291b1b2b213bfce395eccc780ca7a));
-        vk.query[15] = Pairing.G1Point(uint256(0x2f88f752a578072949c15e6f752b087ec7cb029bc6934dc8f57716134ad6d901), uint256(0x2229a3d7a1acfefda80ca6d27c3d9abf5a11bf6b3f8aafa351985ff4e98db79a));
-        vk.query[16] = Pairing.G1Point(uint256(0x0b8ea35d8c7ca8142df22aa154817477bd018a4130ba2dad160649c785480d5b), uint256(0x2f62fe2d33c0294e362aa5a96d0844cdfcb7d88a1e12a75c1862184e040a3408));
+        vk.h= Pairing.G2Point([uint256(0x131865422a99e7f50c3d54df1505b69b58832e6d7152172344abe44c91eae08b), uint256(0x04dfbfcf2b558fd905aa937b4fb300442715e57ab6474c539a7fb0bb35e86bfa)], [uint256(0x08eb98ae1d70fad7458ae1d8230b8ab50ab2db35127c606cff6b2eae75a87982), uint256(0x001c80b039b19d74b629009fa9736b862623cf7ca0a41bf256a81df424c4c73d)]);
+        vk.g_alpha = Pairing.G1Point(uint256(0x2b8889485f6309982fd9f9e282c7516d4913e7aaddd8bdb44febaa6cdca5f59a), uint256(0x00cfb049e9319f697ff4580ae22618c58f6c998a39f730f795e953b5e9cd6b7c));
+        vk.h_beta = Pairing.G2Point([uint256(0x2ab4698fd2a40841625d0237dc54adc7cecc31c60486867cfd813b37347f5d66), uint256(0x2de99ac88ae9da34bbb2d1bc8f097c3b7964cc67cf761362aaf4fa2b063f9f3a)], [uint256(0x302edeead636a9b11622fa3260aa7ddd6df858938cfd0ebdbd534e8338f9f043), uint256(0x09a26bc0eaeed65318d0ef7a33012231984559d2594e6acdcbf4fe433a81187e)]);
+        vk.g_gamma = Pairing.G1Point(uint256(0x2eb86d1f5e7107358fb88a431acb7dd4407c3302847ccea9da6d0146aaa05812), uint256(0x04b455ec2c1a9e29a3820347dcd49cdcfcd858899ee26475dca670d876f484b6));
+        vk.h_gamma = Pairing.G2Point([uint256(0x131865422a99e7f50c3d54df1505b69b58832e6d7152172344abe44c91eae08b), uint256(0x04dfbfcf2b558fd905aa937b4fb300442715e57ab6474c539a7fb0bb35e86bfa)], [uint256(0x08eb98ae1d70fad7458ae1d8230b8ab50ab2db35127c606cff6b2eae75a87982), uint256(0x001c80b039b19d74b629009fa9736b862623cf7ca0a41bf256a81df424c4c73d)]);
+        vk.query = new Pairing.G1Point[](16);
+        vk.query[0] = Pairing.G1Point(uint256(0x2b750a05ad5a99afe50d85a3f3fde0282339bc92ce00d9750ff9930c563da00a), uint256(0x28bdc134d375e4ca7480776ea5cc666ef7ef2481a36258396ca529eff06efb7f));
+        vk.query[1] = Pairing.G1Point(uint256(0x27408a80379e78108e28d4442a9d9f28328694a2bbb7d8abffdcc4b67d1f3a47), uint256(0x21a5dd9a74526d98a9970a84d1c32968d8927c7469253fcb92b4cc5960546d06));
+        vk.query[2] = Pairing.G1Point(uint256(0x01c644fdd01f650c5df49ca33218f4a49ab624cd10d62fae058cabf2e8c4b2f7), uint256(0x1d7d4cee0a7f7defbcce6c6ae7f6d2fa0bc6a499ef5a7afe0ced764777602e7a));
+        vk.query[3] = Pairing.G1Point(uint256(0x2338e68b481fcd2579b3e09937bd64c9d8eaeeecc2f2f19bdee3c43e89091a34), uint256(0x2a87d799f487fdd04877c045054603fc6064f36b1e539d1954b66666e433f2b8));
+        vk.query[4] = Pairing.G1Point(uint256(0x13ad745b6294eb4fb6ea0db4d862f997d35bde81df94049f9bc232c7d255a46b), uint256(0x2b2eca990ef210d346f04bf37834582fc4cd828fef4e87103198381586edfa53));
+        vk.query[5] = Pairing.G1Point(uint256(0x2c3ce9fd1e8a8b298bc8f58ebaad8594d767cd8c75abe8c64e8d1b596fa018f4), uint256(0x1b99e5a3960707b811fa8f89f72f7a77cf3147316a5aa8cf6a8234e5efccd6c3));
+        vk.query[6] = Pairing.G1Point(uint256(0x2ca83b1940c863eb87a92cc952907bebb8a7378509e86449bb558f8fbdbe14c8), uint256(0x30472cd2656bc3edd6de9acd1461edf2e91214e7186be8b16fc9a9d56ced4c27));
+        vk.query[7] = Pairing.G1Point(uint256(0x14f5b0a304772a9a11e765d4d81976495be700f52e63592a10086ee589f026f2), uint256(0x070cf4ddffaea88cf396a2f06eb241a24d933d2b32f114fdd0a882a9bb19e7c5));
+        vk.query[8] = Pairing.G1Point(uint256(0x2eb510e4c4e8572e12b1c83aa22055cfce81d92374f2d8a9b226cdf8f6bc32f0), uint256(0x095f7c87427dd8a1baa57bdf09c77d709c3ae80e9cc1743af34a9b67c34e66c2));
+        vk.query[9] = Pairing.G1Point(uint256(0x20712738d779598c95cdf2c0cebac6bb7362f049f658cbc262eb167715ee69ca), uint256(0x0710cfa3addd7c9c74274c077008e46e4ae66c92d88b93addb997355e6638345));
+        vk.query[10] = Pairing.G1Point(uint256(0x00eb0a5bef5319405ecafe7fdeee5c7605f86d5be87eebf758c74f98a245f98e), uint256(0x088614bf2ff362a9c70add6e0a6898006d32387d3d17967fb3795687f843b3dd));
+        vk.query[11] = Pairing.G1Point(uint256(0x07c40e6b9f9ae064fa4afbaf9b0b76614e7cc0603a783573f21a3d079f25995d), uint256(0x1668248300e29a04b71e22d0e51ef41b32af65a12ddecbfa57d6bf1ff7bcc4ca));
+        vk.query[12] = Pairing.G1Point(uint256(0x157df577a2a10943925bab741585401003f0e6ee66eb3248d3265c0814a3179a), uint256(0x166505e238f3cb31d1487db19a243457d84b66fa56fab2370125f0f37edaede9));
+        vk.query[13] = Pairing.G1Point(uint256(0x2eeb5ffafd17f62642b084f73f85a8a01d4f8231b585ebdfe84b8439b11b098e), uint256(0x1822736c9c9eb60e7cfb37ed158f10b1bbb7382116e7f23fc954f4fe65738c46));
+        vk.query[14] = Pairing.G1Point(uint256(0x0f5fa914aebc09544a49a567c217c8daa4e6049c55fb91ec050f831dd87aa57c), uint256(0x129c19a9ed8bc5a65341b6815757aa32531815c5089001ef541313ff53c34e28));
+        vk.query[15] = Pairing.G1Point(uint256(0x1dfaaac7085c2b331b380bea3a5e5395e892f54487a65520df5309bc95e6b1cb), uint256(0x02e2e2f4743639b1f26ed54744df34dcdc8fd319600d83500a01aa9dcb47aa38));
     }
-
-    //=====================DATA DECLARATION============================
-    //eID struct. Each pseudonym is associated with an eID.
-    struct eID {
-    uint[13] cID;       //the list of candidate IDs (13 candidates)
-    bool ratingToken;   //the rating token. The user can vote if his rating token is true.
-    }
-    
-    //The table/list of users.
-    mapping (address => eID) internal table;
-
-    //The table of ballots/reviews: 15000 dynamic arrays.
-    uint[][15000] internal allReviews; 
-
-    //table of nullifiers
-    mapping(uint256 => bool) internal nulTab;
-    //=================================================================
-    
     function verify(uint[] memory input, Proof memory proof) internal view returns (uint) {
         uint256 snark_scalar_field = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
         VerifyingKey memory vk = verifyingKey();
@@ -629,67 +607,18 @@ contract Verifier {
         if (!Pairing.pairingProd2(proof.a, vk.h_gamma, Pairing.negate(vk.g_gamma), proof.b)) return 2;
         return 0;
     }
-
-    //The modified zkSNARK verification function.
-    //If the proof passes, this function calls the function register() to register the prover as a valid user.
-    function verifyTx(Proof memory proof, uint[16] memory input) public returns (bool r) {
-        uint[] memory inputValues = new uint[](16);
-        require(nulTab[inputValues[14]] == false);  //require the nullifier to be used once
-        require(inputValues[15] != 1);              //require main.zok to output True
-
+    function verifyTx(
+            Proof memory proof, uint[15] memory input
+        ) public view returns (bool r) {
+        uint[] memory inputValues = new uint[](15);
+        
         for(uint i = 0; i < input.length; i++){
             inputValues[i] = input[i];
         }
-
         if (verify(inputValues, proof) == 0) {
-            nulTab[inputValues[13]] = true;         //mark that this nullifier is used.
-            //msg.sender등록에 필요한 cID매핑, ratingToken부여
-            uint[13] memory cID = [inputValues[0], inputValues[1], inputValues[2], inputValues[3], inputValues[4],inputValues[5],inputValues[6],
-            inputValues[7],inputValues[8],inputValues[9],inputValues[10],inputValues[11],inputValues[12]];
-            register(cID, true);
             return true;
         } else {
             return false;
         }
-    }
-
-    //Valid users can cast their vote/review using this function.
-    function Transaction(uint[13] memory inputCID, uint[13] memory inputReview) public{
-        uint weight=0;
-        // 1. A valid user is a user with a rating token
-        require(table[msg.sender].ratingToken == false, "You can rate");
-
-        // 2. The valid user can only vote/review the candidates in the registered list (in eID)
-        bool isMatching = true;
-        // 2.1. Check if the candidate list is matched
-        for (uint i = 0; i <13; i++) {
-            if (inputCID[i] != table[msg.sender].cID[i]) {
-            isMatching = false;
-            break;
-            }
-        }
-        //2.2. Record the votes/reviews
-        if (isMatching) {
-            table[msg.sender].ratingToken = false;      //mark that this user has casted its review/vote
-            for(uint i=0;i<13;i++){
-                uint[13] memory candidates = table[msg.sender].cID; 
-                allReviews[weight][candidates[i]]=inputReview[i];
-            }
-            weight++;
-        } else {
-            revert("cID values must match");
-        }
-    }
-
-    function register(uint[13] memory _cID, bool _ratingToken) internal {
-        table[msg.sender].cID = _cID;
-        table[msg.sender].ratingToken = _ratingToken;
-    }
-
-    event GetResults(uint[][15000]);
-
-    function getAllReviews() public returns (bool) {
-        emit GetResults(allReviews);
-        return true;
     }
 }
