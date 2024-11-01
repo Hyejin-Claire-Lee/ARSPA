@@ -9,8 +9,7 @@
       
   #### Setting up ZoKrates Path
 To ensure the ZoKrates binary is accessible from any directory, add it to your system's `PATH` environment variable. 
-Run the following command to add the path to your shell’s configuration file (e.g., '.bashrc', '.zshrc'), making the change permanent:
-      
+Run the following command to add the path to your shell’s configuration file (e.g., .bashrc, .zshrc), making the change permanent:
   ```
   echo 'export PATH=$PATH:$HOME/.zokrates/bin' >> ~/.zshrc  # or ~/.bashrc
   source ~/.zshrc  # apply the change
