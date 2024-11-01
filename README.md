@@ -1,9 +1,8 @@
 # Deploying ARSPA code for testing purposes.
 **0. Preliminaries**
-- To install ZoKrates:
-  ```
-  https://zokrates.github.io/gettingstarted.html
-  ```
+- ZoKrates Installation
+Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/gettingstarted.html) for a one-line installation command.
+
 - Setting up ZoKrates Path
 To ensure the ZoKrates binary is accessible from any directory, add it to your system's PATH. Run the following command to add the path to your shell’s configuration file (e.g., .bashrc, .zshrc), making the change permanent:
   ```
