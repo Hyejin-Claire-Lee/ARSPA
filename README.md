@@ -41,7 +41,7 @@ zokrates print-proof --format remix
 
   Witness file written to 'witness'
   ```
-- Similarly, we can compute the root in by using functions $r<number>$
+- Similarly, we can compute the root by using functions $r<number>$
   ```
   zokrates compile -i r1.zok
   zokrates compute-witness --verbose >> output.txt
@@ -57,8 +57,8 @@ zokrates print-proof --format remix
   ```
 **4. generate zkSNARK proof**
 - The main zokrates programs are in folders: depth7 ($2^7$ users), depth10 ($2^{10}$ users), depth13 ($2^{13}$ users), and depth17 ($2^{17}$ users).
-- In each folder, there are 13 programs correspond to the number of candidates (from 1 candidate to 13 candidates each reviewer).
-- For example, to generate a proof a system of $2^{17}$ users and each users review 13 candidates, we can use /arspa/depth17/c13/c13_d17.zok:
+- In each folder, there are 13 programs corresponding to the number of candidates (from 1 candidate to 13 candidates each reviewer).
+- For example, to generate a proof for a system of $2^{17}$ users and each user reviews 13 candidates, we can use /arspa/depth17/c13/c13_d17.zok:
   ```
   zokrates compile -i c13_d17.zok
   zokrates setup -s gm17
@@ -70,6 +70,6 @@ zokrates print-proof --format remix
 - The proof string in proof_c13d17.txt can be used to call the function verifyTx in the smart contract.
 
 **5. Smart contract**
-- The smart contract can be deployed in the mainet or testnet.
+- The smart contract can be deployed in the main net or testnet.
 - We can test the verifyTx() function by using the proof string from the above steps.
-- NOTE: candidate IDs must be in range 0 to 12.
+- NOTE: candidate IDs must be in the range of 0 to 12.
