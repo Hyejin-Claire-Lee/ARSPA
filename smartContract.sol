@@ -599,8 +599,8 @@ contract Verifier {
     //The table/list of users.
     mapping (address => eID) internal table;
 
-    //The table of ballots/reviews: 15000 dynamic arrays.
-    uint[][15000] internal allReviews; 
+    //The table of ballots/reviews: 13 dynamic arrays.
+    uint[][13] internal allReviews; 
 
     //table of nullifiers
     mapping(uint256 => bool) internal nulTab;
@@ -686,7 +686,7 @@ contract Verifier {
         table[msg.sender].ratingToken = _ratingToken;
     }
 
-    event GetResults(uint[][15000]);
+    event GetResults(uint[][13]);
 
     function getAllReviews() public returns (bool) {
         emit GetResults(allReviews);
