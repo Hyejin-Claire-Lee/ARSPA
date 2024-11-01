@@ -66,6 +66,7 @@ zokrates print-proof --format remix
   zokrates generate-proof -s gm17
   zokrates print-proof --format remix >> proof_c13d17.txt
   ```
+- The verification key in the smart contract should be updated using the newly generated verification key.
 - The proof string in proof_c13d17.txt can be used to call the function verifyTx in the smart contract.
 
 **5. Smart contract**
