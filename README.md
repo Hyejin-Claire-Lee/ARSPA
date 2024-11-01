@@ -1,4 +1,4 @@
-# ARSPA Experiments
+# Deploying ARSPA code for testing purposes.
 **0. Preliminaries**
 - To install zokrates:
   ```
