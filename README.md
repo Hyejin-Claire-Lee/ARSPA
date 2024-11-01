@@ -73,3 +73,4 @@ zokrates print-proof --format remix
 - The smart contract can be deployed in the main net or testnet.
 - We can test the verifyTx() function by using the proof string from the above steps.
 - NOTE: candidate IDs must be in the range of 0 to 12.
+# ARSPA
