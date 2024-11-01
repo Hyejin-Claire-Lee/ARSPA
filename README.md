@@ -67,3 +67,8 @@ zokrates print-proof --format remix
   zokrates print-proof --format remix >> proof_c13d17.txt
   ```
 - The proof string in proof_c13d17.txt can be used to call the function verifyTx in the smart contract.
+
+**5. Smart contract**
+- The smart contract can be deployed in the mainet or testnet.
+- We can test the verifyTx() function by using the proof string from the above steps.
+- NOTE: candidate IDs must be in range 0 to 12.
