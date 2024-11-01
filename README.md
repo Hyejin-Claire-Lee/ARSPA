@@ -16,8 +16,8 @@ Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/getting
   curl -LSfs get.zokrat.es | sh
   ```
 - #### Setting up ZoKrates Path  
-  To ensure the ZoKrates binary is accessible from any directory, add it to your system's `PATH` environment variable.  
-  Run the following command to add the path to your shell’s configuration file (e.g., `.bashrc`, `.zshrc`), making the change permanent:
+  To ensure **ZoKrates** operates correctly, you need to set your **`PATH`**. Modify **`$PATH`** and **`$HOME`** in the command below to match your environment, add it to your **`.bashrc`** or **`.zshrc`** file, and then run it.
+
 
   ```
   echo 'export PATH=$PATH:$HOME/.zokrates/bin' >> ~/.zshrc  # or ~/.bashrc
