@@ -604,6 +604,10 @@ contract Verifier {
 
     //table of nullifiers
     mapping(uint256 => bool) internal nulTab;
+
+    //get all reviews recorded on the blockchain
+    //in the future, data should be recorded on IPFS
+    event GetAllReview(uint[][13]);
     //=================================================================
     
     function verify(uint[] memory input, Proof memory proof) internal view returns (uint) {
@@ -655,7 +659,6 @@ contract Verifier {
 
     //Valid users can cast their vote/review using this function.
     function Transaction(uint[13] memory inputCID, uint[13] memory inputReview) public{
-        uint weight=0;
         // 1. A valid user is a user with a rating token
         require(table[msg.sender].ratingToken == false, "You can rate");
 
@@ -672,10 +675,8 @@ contract Verifier {
         if (isMatching) {
             table[msg.sender].ratingToken = false;      //mark that this user has casted its review/vote
             for(uint i=0;i<13;i++){
-                uint[13] memory candidates = table[msg.sender].cID; 
-                allReviews[weight][candidates[i]]=inputReview[i];
+                allReviews[inputCID[i]].push(inputReview[i]);
             }
-            weight++;
         } else {
             revert("cID values must match");
         }
@@ -686,10 +687,8 @@ contract Verifier {
         table[msg.sender].ratingToken = _ratingToken;
     }
 
-    event GetResults(uint[][13]);
-
     function getAllReviews() public returns (bool) {
-        emit GetResults(allReviews);
+        emit GetAllReview(allReviews);
         return true;
     }
 }
