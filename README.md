@@ -1,18 +1,18 @@
 # ARSPA code for testing purposes.
 
-## a. Prerequisites
+## A. Prerequisites
   Prerequisites for setting up the environment required before testing our system.
 
-  ### a.1 Remix IDE
+  ### A.1 Remix IDE
   For smart contract development, open [Remix IDE](https://remix.ethereum.org/) directly in your browser.  
   Refer to the [Remix IDE Documentation](https://remix-ide.readthedocs.io/en/latest/) for setup instructions and tips.
 
   
-  ### a.2 ZoKrates
-  #### a.2.1 ZoKrates Installation
+  ### A.2 ZoKrates
+  #### A.2.1 ZoKrates Installation
   Refer to the [ZoKrates Getting Started Guide](https://zokrates.github.io/gettingstarted.html) for a one-line installation command.
   
-  #### a.2.2 Setting up ZoKrates Path
+  #### A.2.2 Setting up ZoKrates Path
   To ensure the ZoKrates binary is accessible from any directory, add it to your system's `PATH` environment variable. 
   Run the following command to add the path to your shell’s configuration file (e.g., `.bashrc`, `.zshrc`), making the change permanent:
   ```
