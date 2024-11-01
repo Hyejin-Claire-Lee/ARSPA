@@ -621,12 +621,12 @@ contract Verifier {
 
     function verifyTx(Proof memory proof, uint[5] memory input) public returns (bool r) {
         uint[] memory inputValues = new uint[](5);
-        //check if nullifier has been used before
-        require(nulTable[inputValues[3]] == false);
-
+        
         for(uint i = 0; i < input.length; i++){
             inputValues[i] = input[i];
         }
+        require(nulTab[inputValues[14]] == false);
+        require(inputValues[15] == 1);
         if (verify(inputValues, proof) == 0) {
             //if proof passed, nullifer = true to prevent this prover from re-evaluating.
             nulTable[inputValues[3]] = true;
