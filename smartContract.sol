@@ -7,10 +7,7 @@ pragma solidity ^0.8.0;
  * @author Mustafa Al-Bassam (mus@musalbas.com)
  * @dev Homepage: https://github.com/musalbas/solidity-BN256G2
  */
-/**
-   * @title Verifier_13
-   * @custom:dev-run-script scripts/deploy_with_ethers.ts
-*/
+
 library BN256G2 {
     uint256 internal constant FIELD_MODULUS = 0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47;
     uint256 internal constant TWISTBX = 0x2b149d40ceb8aaae81be18991be06ac3b5b4c5e559dbefa33267e6dc24a138e5;
@@ -563,6 +560,28 @@ contract Verifier {
         Pairing.G2Point b;
         Pairing.G1Point c;
     }
+
+    //=====================DATA DECLARATION============================
+    //eID struct. Each pseudonym is associated with an eID.
+    struct eID {        //Evaluator identifier.
+    uint[13] cID;       //cID stores up to 13 candidate identifiers, with unused entries set to 0.
+    bool ratingToken;   //The rating token is the evaluator's right to review.
+    }
+    
+    //List of evaluators.
+    mapping (address => eID) internal table;
+
+    uint[13][] public allReviews;    // mapping (address => uint256[][]) allReviews;
+    uint public weight = 0;
+
+    //Table of nullifiers
+    mapping(uint256 => bool) internal nulTab;
+
+    //Get all reviews recorded on the blockchain. Consider using IPFS on a large scale.
+    event GetAllReview(uint256[13][]);
+    //=================================================================~~
+
+
     function verifyingKey() pure internal returns (VerifyingKey memory vk) {
         vk.h= Pairing.G2Point([uint256(0x115a9530cdb9da5de60a85cf52225fe7f5ca63421a03e160b6d4129c44f78d87), uint256(0x162d302cdeda109b9508fe7f35eb54b55658444514c457198074ac9fe5e327f3)], [uint256(0x18253ee651894e8044e046d438fc29ac29447a43e558c8b847021a2c9d66d920), uint256(0x05171c45c6a47f31564fe087cfb90ef1d1a02e191c8279db43d43165bd2be016)]);
         vk.g_alpha = Pairing.G1Point(uint256(0x1f67f56bb8e611719c699db47d7502f04ec5341667effff8d49f977db02b72b0), uint256(0x1764d29253be4d610035fb3ba7560bbbd22edf6d2fb7db79fd6683222caf6480));
@@ -589,27 +608,6 @@ contract Verifier {
         vk.query[16] = Pairing.G1Point(uint256(0x0b8ea35d8c7ca8142df22aa154817477bd018a4130ba2dad160649c785480d5b), uint256(0x2f62fe2d33c0294e362aa5a96d0844cdfcb7d88a1e12a75c1862184e040a3408));
     }
 
-    //=====================DATA DECLARATION============================
-    //eID struct. Each pseudonym is associated with an eID.
-    struct eID {
-    uint[13] cID;       //the list of candidate IDs (13 candidates)
-    bool ratingToken;   //the rating token. The user can vote if his rating token is true.
-    }
-    
-    //The table/list of users.
-    mapping (address => eID) internal table;
-
-    //The table of ballots/reviews: 13 dynamic arrays.
-    uint[][13] internal allReviews; 
-
-    //table of nullifiers
-    mapping(uint256 => bool) internal nulTab;
-
-    //get all reviews recorded on the blockchain
-    //in the future, data should be recorded on IPFS
-    event GetAllReview(uint[][13]);
-    //=================================================================
-    
     function verify(uint[] memory input, Proof memory proof) internal view returns (uint) {
         uint256 snark_scalar_field = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
         VerifyingKey memory vk = verifyingKey();
@@ -634,59 +632,53 @@ contract Verifier {
         return 0;
     }
 
-    //The modified zkSNARK verification function.
-    //If the proof passes, this function calls the function register() to register the prover as a valid user.
     function verifyTx(Proof memory proof, uint[16] memory input) public returns (bool r) {
         uint[] memory inputValues = new uint[](16);
-        require(nulTab[inputValues[14]] == false);  //require the nullifier to be used once
-        require(inputValues[15] != 1);              //require main.zok to output True
-
         for(uint i = 0; i < input.length; i++){
             inputValues[i] = input[i];
         }
 
+        //check if nullifier has been used before
+        require(nulTab[inputValues[14]] == false);
+        require(inputValues[15] == 1);
+
         if (verify(inputValues, proof) == 0) {
-            nulTab[inputValues[13]] = true;         //mark that this nullifier is used.
-            //msg.sender등록에 필요한 cID매핑, ratingToken부여
+            //if proof passed, nullifer = true to prevent this prover from re-evaluating.
+            nulTab[inputValues[14]] = true;
+
+            //Register msg.sender by mapping the required cID and assigning a ratingToken.
             uint[13] memory cID = [inputValues[0], inputValues[1], inputValues[2], inputValues[3], inputValues[4],inputValues[5],inputValues[6],
             inputValues[7],inputValues[8],inputValues[9],inputValues[10],inputValues[11],inputValues[12]];
+
+            //mark that this nul/tag is used
             register(cID, true);
             return true;
         } else {
             return false;
         }
     }
+    function Transaction(uint[13] memory inputReview) public returns(bool){
+        // uint[13] memory buff;
+        require(table[msg.sender].ratingToken == true);
 
-    //Valid users can cast their vote/review using this function.
-    function Transaction(uint[13] memory inputCID, uint[13] memory inputReview) public{
-        // 1. A valid user is a user with a rating token
-        require(table[msg.sender].ratingToken == false, "You can rate");
-
-        // 2. The valid user can only vote/review the candidates in the registered list (in eID)
-        bool isMatching = true;
-        // 2.1. Check if the candidate list is matched
-        for (uint i = 0; i <13; i++) {
-            if (inputCID[i] != table[msg.sender].cID[i]) {
-            isMatching = false;
-            break;
+        for (uint i = 0; i < 13; i++) {
+            if (table[msg.sender].cID[i] == 0 && inputReview[i] != 0){
+                return false;
             }
         }
-        //2.2. Record the votes/reviews
-        if (isMatching) {
-            table[msg.sender].ratingToken = false;      //mark that this user has casted its review/vote
-            for(uint i=0;i<13;i++){
-                allReviews[inputCID[i]].push(inputReview[i]);
-            }
-        } else {
-            revert("cID values must match");
-        }
+
+        allReviews.push(inputReview);
+        //review는 한 번 남기면 token없어짐
+        table[msg.sender].ratingToken = false;
+        return true;
     }
 
-    function register(uint[13] memory _cID, bool _ratingToken) internal {
-        table[msg.sender].cID = _cID;
-        table[msg.sender].ratingToken = _ratingToken;
+    function register(uint[13] memory _cID, bool _ratingToken) internal { //register된 address에 대한 정보 저장할 table2
+        eID storage registereID=table[msg.sender];
+        registereID.cID = _cID;
+        registereID.ratingToken = _ratingToken;
     }
-
+    
     function getAllReviews() public returns (bool) {
         emit GetAllReview(allReviews);
         return true;
