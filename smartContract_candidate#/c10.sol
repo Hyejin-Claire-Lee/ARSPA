@@ -561,25 +561,25 @@ contract Verifier {
         Pairing.G1Point c;
     }
 
-    //nullifier table
-    mapping (uint256 => bool) public nulTable;
-
-    // eID=msg.sender는 cID, ratingToken, Ethereum address(as a key)를 가진 사람이다
-    //HEREEEEEEEEEEEEEEEEEEEEEEEEEEE
-    struct eID {
-        uint[10] cID;
-        bool ratingToken;
+    //=====================DATA DECLARATION============================
+    //eID struct. Each pseudonym is associated with an eID.
+    struct eID {        //Evaluator identifier.
+    uint[13] cID;       //cID stores up to 13 candidate identifiers, with unused entries set to 0.
+    bool ratingToken;   //The rating token is the evaluator's right to review.
     }
-    mapping (address => eID) public table;
+    
+    //List of evaluators.
+    mapping (address => eID) internal table;
 
-    //transaction들 저장할 table3
-    uint[10][] public allReviews;
-    // mapping (address => uint256[][]) allReviews;
+    uint[13][] public allReviews;    // mapping (address => uint256[][]) allReviews;
     uint public weight = 0;
 
-    //Event
-    event GetAllReview(uint256[10][]);
+    //Table of nullifiers
+    mapping(uint256 => bool) internal nulTab;
 
+    //Get all reviews recorded on the blockchain. Consider using IPFS on a large scale.
+    event GetAllReview(uint256[13][]);
+    //=================================================================~~
 
     function verifyingKey() pure internal returns (VerifyingKey memory vk) {
         vk.h= Pairing.G2Point([uint256(0x19bf93a1f72b3cebffd2b62b0309d43b001cc6ef2d87b97aa2897c5a419ee365), uint256(0x1945fb6f5a34d59cc7e01200b29bf2c7cb15145ee6110db56e15226df31b6c57)], [uint256(0x2126ddf78dda6a35011cecf0c271b6e91a883ab71884760d04f5ec3a388e827b), uint256(0x191e0324a7a89771c9bb7f1a5e411b9c9a03c49ee6fe5cb48b5b37a158937fc8)]);
