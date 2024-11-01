@@ -1,0 +1,34 @@
+import "hashes/poseidon/poseidon" as poseidon;
+from "ecc/babyjubjubParams" import BabyJubJubParams;
+import "ecc/babyjubjubParams" as context;
+
+def main(private field r, private field[17] path, field[11] cID, field root, field nullifier)->bool{
+    field h    = poseidon([r]);
+    field cid  = poseidon([cID[0],cID[1],cID[2],cID[3],cID[4],cID[5]]);
+    field cid2 = poseidon([cID[6],cID[7],cID[8],cID[9],cID[10]]);
+    field leaf = poseidon([h, cid, cid2]);
+
+    //check if nullifier is correct
+    field nul = poseidon([r+1]);
+    bool b = (nul == nullifier)?true:false;
+    
+    field node16 = poseidon([leaf,path[16]]);   
+    field node15 = poseidon([node16,path[15]]);         
+    field node14 = poseidon([node15,path[14]]);
+    field node13 = poseidon([node14,path[13]]);
+    field node12 = poseidon([node13,path[12]]);
+    field node11 = poseidon([node12,path[11]]);
+    field node10 = poseidon([node11,path[10]]);
+    field node9  = poseidon([node10,path[9]]);
+    field node8  = poseidon([node9,path[8]]);
+    field node7  = poseidon([node8,path[7]]);
+    field node6  = poseidon([node7,path[6]]);              
+    field node5  = poseidon([node6,path[5]]);
+    field node4  = poseidon([node5,path[4]]);
+    field node3  = poseidon([node4,path[3]]);
+    field node2  = poseidon([node3,path[2]]);
+    field node1  = poseidon([node2,path[1]]);
+    field node0 = poseidon([node1,path[0]]); //node[0] is computed root in program.
+
+    return (root == node0) && b ? true:false;
+}                                                                                        

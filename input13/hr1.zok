@@ -1,0 +1,7 @@
+import "hashes/poseidon/poseidon" as poseidon;
+from "ecc/babyjubjubParams" import BabyJubJubParams;
+import "ecc/babyjubjubParams" as context;
+
+def main()->field{
+    return poseidon([32948723847+1]);
+}

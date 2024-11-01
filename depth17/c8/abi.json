@@ -1,0 +1,40 @@
+{
+  "inputs": [
+    {
+      "name": "r",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "path",
+      "public": false,
+      "type": "array",
+      "components": {
+        "size": 17,
+        "type": "field"
+      }
+    },
+    {
+      "name": "cID",
+      "public": true,
+      "type": "array",
+      "components": {
+        "size": 8,
+        "type": "field"
+      }
+    },
+    {
+      "name": "root",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "nullifier",
+      "public": true,
+      "type": "field"
+    }
+  ],
+  "output": {
+    "type": "bool"
+  }
+}
