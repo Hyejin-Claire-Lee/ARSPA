@@ -1,6 +1,6 @@
 # Deploying ARSPA code for testing purposes.
 **0. Preliminaries**
-- To install zokrates:
+- To install ZoKrates:
   ```
   https://zokrates.github.io/gettingstarted.html
   ```
