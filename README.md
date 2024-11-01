@@ -27,7 +27,7 @@ zokrates print-proof --format remix
   zokrates compile -i <name>.zok
   zokrates compute-witness --verbose >> output.txt
   ```
-- For example, to compute a leaf ($\mathsf{leaf = H(H(r),H(cID))}), we can run functions $c<number>$:
+- For example, to compute a leaf ($\mathsf{leaf = H(H(r),H(cID))}$), we can run functions $c<number>$:
   ```
   zokrates compile -i c1.zok
   zokrates compute-witness --verbose >> output.txt
