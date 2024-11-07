@@ -38,7 +38,7 @@ Before deploying the smart contract to the blockchain, replace the zk-SNARK veri
   ```
   #### Generate proof:
   ```
-  zokrates compute-witness -a <inputs of name.zok>
+  zokrates compute-witness -a <inputs of name.zok> #main.zok
   zokrates generate-proof -s gm17
   zokrates print-proof --format remix
   ```
@@ -53,7 +53,7 @@ The root and leaves of the Merkle tree can be computed using Zokrates programs i
 
 For example, to compute a leaf ($\mathsf{leaf = H(H(r),H(cID))}$), we can run functions $c<number>$:
   ```
-  zokrates compile -i c1.zok
+  zokrates compile -i c13.zok
   zokrates compute-witness --verbose >> output.txt
   ```
 
@@ -69,7 +69,7 @@ The leaf is written to output.txt:
 
 Similarly, we can compute the root by using functions $r<number>$
   ```
-  zokrates compile -i r1.zok
+  zokrates compile -i r13.zok
   zokrates compute-witness --verbose >> output.txt
   ```
 
